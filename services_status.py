@@ -16,13 +16,20 @@ class Service:
 		# Grab Service Data
 		output = subprocess.run(f'systemctl status {process}', shell=True, stdout=subprocess.PIPE).stdout.decode('utf-8')
 		output = output.splitlines()
+
 		# Parse to easily grab service status
 		output2 = output[2].split()
-		# Parse to easily grab uptime
-		output3 = output[2].split(";")
-		output4 = output3[1].strip()
 		self.status = output2[1]
-		self.uptime = output4
+
+		# Check to see if process is running with uptime
+		# Check for ; in output. If true than grab uptime
+		if (";" in output[2]):
+			# Parse to easily grab uptime
+			output3 = output[2].split(";")
+			output4 = output3[1].strip()
+			self.uptime = output4
+		else:
+			self.uptime = "Down"
 
 # Grab Plex Service Data
 output = subprocess.run(['snap', 'services'], stdout=subprocess.PIPE).stdout.decode('utf-8')
