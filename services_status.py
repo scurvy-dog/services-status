@@ -50,7 +50,7 @@ plex = Service("Plex Media Server",output2[2],plex_uptime[1])
 
 # Grab Influxdb Service Data
 influxdb = Service("Influxdb","","")
-influxdb.grab_status("influxdb")
+influxdb.grab_status("influxdb2")
 
 # Create Grafana class object
 grafana = Service("Grafana","","")
