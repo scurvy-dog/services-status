@@ -32,25 +32,12 @@ class Service:
 			self.uptime = "Down"
 
 # Grab Plex Service Data
-output = subprocess.run(['snap', 'services'], stdout=subprocess.PIPE).stdout.decode('utf-8')
-output = output.splitlines()
-output2 = output[1].split()
-
-# Grabbing PID works. The output of the ps command though seems to add 1 character per line in the output
-plex_pid = subprocess.run('pidof \'Plex Media Server\'', shell=True, stdout=subprocess.PIPE).stdout.decode('utf-8')
-#print(plex_pid)
-plex_uptime = subprocess.run(f'ps -o etime -p {plex_pid}', shell=True, stdout=subprocess.PIPE).stdout.decode('utf-8')
-
-#for i in plex_uptime:
-#	print (i)
-
-
-# Create class object
-plex = Service("Plex Media Server",output2[2],plex_uptime[1])
+plex = Service("Plex Media Server","","")
+plex.grab_status("plexmediaserver")
 
 # Grab Influxdb Service Data
 influxdb = Service("Influxdb","","")
-influxdb.grab_status("influxdb2")
+influxdb.grab_status("influxdb")
 
 # Create Grafana class object
 grafana = Service("Grafana","","")
