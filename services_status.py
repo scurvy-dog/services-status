@@ -9,7 +9,7 @@ class Service:
 	def __str__(self):
 		a = self.name.ljust(22)
 		b = self.status.ljust(10)
-		c = self.uptime.ljust(20)
+		c = self.uptime.ljust(21)
 		return  "| %s| %s| %s|" % (a,b,c)
 	
 	def grab_status (self,process):
@@ -54,8 +54,8 @@ signalk_socket.grab_status("signalk.socket")
 
 
 #Print Table
-table_row = "-----------------------------------------------------------"
-table_header = "| Service Name          |   Status  |        Uptime       |"
+table_row = "------------------------------------------------------------"
+table_header = "| Service Name          |   Status  |        Uptime        |"
 
 print (table_row)
 print (table_header)
